@@ -1,0 +1,78 @@
+<div class="row ">
+  <div class="col-md-10 col-sm-12 pt-3">
+    <h1>User Information</h1>
+    <p>
+      Enter Name filter criteria and hit &lt;Enter&gt; to see specific Name results. Use the refresh button to reload the page.
+    </p>
+  </div>
+</div>
+
+<table class="table table-responsive">
+  <thead>
+    <tr>
+      <th></th>
+      <th class="cursor-pointer" (click)="sortUserInformation('name', 'name')">
+        <u>Name</u>
+        <span *ngIf="sortColumn == 'name'" class="fa" [ngClass]="{'fa-caret-down': !isAscending, 'fa-caret-up': isAscending}"></span>
+      </th>
+      <th class="cursor-pointer" (click)="sortUserInformation('username', 'name')">
+        <u>User Name</u>
+        <span *ngIf="sortColumn == 'username'" class="fa" [ngClass]="{'fa-caret-down': !isAscending, 'fa-caret-up': isAscending}"></span>
+      </th>
+      <th class="cursor-pointer" (click)="sortUserInformation('email', 'name')">
+        <u>Email</u>
+        <span *ngIf="sortColumn == 'email'" class="fa" [ngClass]="{'fa-caret-down': !isAscending, 'fa-caret-up': isAscending}"></span>
+      </th>
+      <th class="cursor-pointer" (click)="sortUserInformation('phone', 'name')">
+        <u>Phone</u>
+        <span *ngIf="sortColumn == 'phone'" class="fa" [ngClass]="{'fa-caret-down': !isAscending, 'fa-caret-up': isAscending}"></span>
+      </th>
+      <th class="cursor-pointer" (click)="sortUserInformation('website', 'name')">
+        <u>Website</u>
+        <span *ngIf="sortColumn == 'website'" class="fa" [ngClass]="{'fa-caret-down': !isAscending, 'fa-caret-up': isAscending}"></span>
+      </th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let user of userData">
+    <tr>
+      <td>
+        <i class="fa fa-id-card text-red cursor-pointer" aria-hidden="true" title="Click to Expand/Collapse Contact Card" (click)="openContactCard(user)"></i>
+      </td>
+      <td>
+        {{user.name}}
+      </td>
+      <td>
+        {{user.username}}
+      </td>
+      <td>{{user.email}}</td>
+      <td>
+        <a href="tel:{{user.phone}}">
+          {{user.phone}}
+        </a>
+      </td>
+      <td>
+        <a href="http://www.{{user.website}}" target="_blank">
+          {{user.website}}
+        </a>
+      </td>
+    </tr>
+    <tr class="bg-light" *ngIf="user.isexpand">
+      <td>
+      </td>
+      <td colspan="5">
+        {{user.address.suite}}, {{user.address.street}}, {{user.address.city}}, {{user.address.zipcode}} &nbsp;
+        <a target="_blank" title="Click to open this address on Map" href="https://maps.google.com/?q={{user.address.suite}}, {{user.address.street}}, {{user.address.city}}, {{user.address.zipcode}}">
+          <i class="fas fa-map-marker-alt"></i>
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div *ngIf="userData != null && userData.length == 0">
+  None Found. Please update your search criteria.
+</div>
+
+<div *ngIf="!userData">
+  <span class="fa fa-spinner fa-pulse fa-2x fa-fw"></span>
+</div>

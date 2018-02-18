@@ -1,0 +1,37 @@
+<nav class="navbar navbar-full navbar-dark bg-secondary">
+  <div class="row col-12">
+    <div class="col-9">
+      <a class="navbar-brand" href="/">
+        <h2>
+          GAURAV- Assignment for NorthWest Mutual Insurance.
+        </h2>
+      </a>
+    </div>
+    <div class="col-md-3">
+      <span>
+        <form class="form-inline" [formGroup]="searchForm" (ngSubmit)="filterUser(searchForm.value)">
+
+          <input type="text" class="form-control mb-1 mr-sm-1" autofocus id="userText" formControlName="userText" [(ngModel)]="filterText"
+          />
+          <button class="btn btn-success mb-1" type="submit" id="btnFilterUser">
+            <span class="fa fa-search"></span>
+          </button>
+          &nbsp;
+          <button class="btn btn-success mb-1" type="button" id="btnReloadUser" (click)="reloadUser()" title="Click to reset the search.">
+            <i class="fas fa-sync-alt"></i>
+          </button>
+        </form>
+
+        <div class="text-danger pt-3 pt-sm-0">
+          <span *ngIf="!isSearhValid">
+            Inavlid search critera.
+          </span>
+        </div>
+      </span>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid">
+  <app-user-information [userData]="userFilterData"> </app-user-information>
+</div>
